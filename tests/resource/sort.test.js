@@ -65,11 +65,11 @@ describe('Resource(sort)', function() {
       url: test.baseUrl + '/users?sort=username'
     }, function(err, response, body) {
       expect(response.statusCode).to.equal(200);
-        var records = JSON.parse(body).map(function(r) {
-          return _.omit(r, 'id');
-        });
-        expect(records).to.eql(_.sortByAll(test.userlist, ['username']));
-        done();
+      var records = JSON.parse(body).map(function(r) {
+        return _.omit(r, 'id');
+      });
+      expect(records).to.eql(_.sortByAll(test.userlist, ['username']));
+      done();
     });
   });
 
@@ -150,7 +150,7 @@ describe('Resource(sort)', function() {
       expect(response.statusCode).to.equal(400);
       var result = JSON.parse(body);
       expect(result.message).to.contain('Sorting not allowed');
-      expect(result.errors).to.eql(['username','invalid']);
+      expect(result.errors).to.eql(['username', 'invalid']);
       done();
     });
   });

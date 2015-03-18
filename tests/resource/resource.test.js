@@ -411,7 +411,7 @@ describe('Resource(basic)', function() {
       });
     });
 
-    it('should support a generic query string as well as criteria added in a milestone', function(done) {
+    it('should support a generic query string as well as milestone criteria', function(done) {
       test.userResource.enableCriteriaTest = true;
 
       request.get({

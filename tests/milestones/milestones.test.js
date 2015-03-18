@@ -148,7 +148,7 @@ describe('Milestones', function() {
 
     function setResponse(res) {
       res.status(420);
-      res.json({test: 'test'});
+      res.json({ test: 'test' });
     }
 
     it('should support running as a function', function(done) {
@@ -273,7 +273,7 @@ describe('Milestones', function() {
   describe('throwing errors', function() {
     var ErrorMiddleware, error;
 
-    beforeEach(function () {
+    beforeEach(function() {
       ErrorMiddleware = {
         results: {
           beforeCalled: false,
@@ -281,7 +281,7 @@ describe('Milestones', function() {
         },
         create: {
           write: {
-            action: function (req, res, context) {
+            action: function(req, res, context) {
               ErrorMiddleware.results.actionCalled = true;
               context.continue();
             }
@@ -294,8 +294,8 @@ describe('Milestones', function() {
     function checkErrored(done) {
       request.post({
         url: test.baseUrl + '/users',
-        json: {username: 'jamez', email: 'jamez@gmail.com'}
-      }, function (err, response, body) {
+        json: { username: 'jamez', email: 'jamez@gmail.com' }
+      }, function(err, response, body) {
         expect(ErrorMiddleware.results.beforeCalled).to.be.true;
         expect(ErrorMiddleware.results.actionCalled).to.be.false;
         expect(response.statusCode).to.be.eql(error.status);
@@ -305,8 +305,8 @@ describe('Milestones', function() {
       });
     }
 
-    it('should support throw in sync', function (done) {
-      ErrorMiddleware.create.write.before = function (req, res, context) {
+    it('should support throw in sync', function(done) {
+      ErrorMiddleware.create.write.before = function(req, res, context) {
         ErrorMiddleware.results.beforeCalled = true;
         throw error;
       };
@@ -315,10 +315,10 @@ describe('Milestones', function() {
       checkErrored(done);
     });
 
-    it('should support throwing in a promise', function (done) {
-      ErrorMiddleware.create.write.before = function (req, res, context) {
+    it('should support throwing in a promise', function(done) {
+      ErrorMiddleware.create.write.before = function(req, res, context) {
         ErrorMiddleware.results.beforeCalled = true;
-        return new Promise(function (resolve) {
+        return new Promise(function(resolve) {
           throw error;
         });
       };
@@ -327,8 +327,8 @@ describe('Milestones', function() {
       checkErrored(done);
     });
 
-    it('should support context.error function when in a callback', function (done) {
-      ErrorMiddleware.create.write.before = function (req, res, context) {
+    it('should support context.error function when in a callback', function(done) {
+      ErrorMiddleware.create.write.before = function(req, res, context) {
         ErrorMiddleware.results.beforeCalled = true;
 
         setTimeout(function() {
@@ -340,8 +340,8 @@ describe('Milestones', function() {
       checkErrored(done);
     });
 
-    it('should support context.error function with error constructor arguments', function (done) {
-      ErrorMiddleware.create.write.before = function (req, res, context) {
+    it('should support context.error function with error constructor arguments', function(done) {
+      ErrorMiddleware.create.write.before = function(req, res, context) {
         ErrorMiddleware.results.beforeCalled = true;
 
         context.error(420, 'test error', ['test', 'error']);
@@ -372,7 +372,7 @@ describe('Milestones', function() {
   });
 
   describe('general behavior', function() {
-    it('should not skip the before action of next milestone if an after resolved to skip', function(done) {
+    it('should not skip the before action of next milestone', function(done) {
       var SkipMiddleware = {
         results: {
           beforeCalled: false,

@@ -12,9 +12,10 @@
   "main": "lib/",
   "scripts": {
     "jshint": "jshint ./lib ./tests",
+    "jscs": "jscs ./lib ./tests",
     "mocha": "mocha --check-leaks -R spec -u exports tests/*.test.js tests/**/*.test.js",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- -- tests/*.test.js tests/**/*.test.js",
-    "test": "npm run-script jshint && npm run-script mocha"
+    "test": "npm run-script jshint && npm run-script jscs && npm run-script mocha"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "mocha": "^2.1.0",
     "chai": "^2.0.0",
     "jshint": "^2.6.0",
+    "jscs": "^1.11.3",
     "istanbul": "^0.3.6",
     "sequelize": "git://github.com/sequelize/sequelize#master"
   }
